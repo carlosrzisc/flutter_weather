@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/api/service.dart';
 import 'package:flutter_weather/model/forecast.dart';
+import 'package:flutter_weather/ui/details/forecast_details.dart';
+
+import 'package:intl/intl.dart';
 
 class ForecastList extends StatefulWidget {
   @override
@@ -25,7 +28,7 @@ class _ForecastListState extends State<ForecastList> {
     return new ListView.builder(
       itemBuilder: (BuildContext context, int index) =>
           new _ForecastListItem(_forecastData.forecastList[index]),
-      itemCount: _forecastData == null ? 0 : _forecastData.forecastList.length,
+      itemCount: _forecastData == null ? 0 : _forecastData.forecastList.length
     );
   }
 }
@@ -36,15 +39,24 @@ class _ForecastListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      child: new Container(
-          padding: new EdgeInsets.all(20.0),
-          child: new Column(
-            children: <Widget>[
-              new Text(weather.temperature),
-              new Text(weather.description)
-            ],
-          )),
-    );
+
+    return new Material(
+        child: new InkWell(
+          onTap: () => _launchDetailsPage(context, weather),
+          child: new Container(
+              padding: new EdgeInsets.all(20.0),
+              child: new Column(
+                children: <Widget>[
+                  new Text(weather.temperature),
+                  new Text(weather.condition.description),
+                  new Text(DateFormat('EEEE').format(weather.dateTime))
+                ],
+              )),
+        ));
+  }
+
+  void _launchDetailsPage(BuildContext context, ForecastWeather weather) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DetailsPage(weather)));
   }
 }

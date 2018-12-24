@@ -14,23 +14,23 @@ class Api {
   }
 
   // Endpoints definition from the openweathermap API
-  static final String apiKey = "<set-your-own-api-key>";
-  static final String baseUrl = "http://api.openweathermap.org/data/2.5";
-  static final String weatherEndpoint = "$baseUrl/weather?APPID=$apiKey&${getLocation()}&units=metric&cnt=7";
-  static final String forecastEndpoint = "$baseUrl/forecast?APPID=$apiKey&${getLocation()}&units=metric&cnt=7";
+  static final String _apiKey = "<set-your-own-api-key>";
+  static final String _baseUrl = "http://api.openweathermap.org/data/2.5";
+  static final String _weatherEndpoint = "$_baseUrl/weather?APPID=$_apiKey&${getLocation()}&units=metric";
+  static final String _forecastEndpoint = "$_baseUrl/forecast?APPID=$_apiKey&${getLocation()}&units=metric";
 
   /// Gets the user selected location query
   static String getLocation() {
     // Temporarily hardcoding location
     // "q=Aguascalientes,MX"
-    // "lat=9.846130&lon=-83.921799"
-    return "lat=9.846130&lon=-83.921799";
+    // "lat=21.879610&lon=-102.295227"
+    return "lat=21.879610&lon=-102.295227";
   }
 
   /// Make a request to the "weather" endpoint
   Future<Weather> getWeather() async {
     http.Response response = await http.get(
-        Uri.encodeFull(weatherEndpoint), headers: { "Accept" : "application/json" }
+        Uri.encodeFull(_weatherEndpoint), headers: { "Accept" : "application/json" }
     );
     return Weather.deserialize(response.body);
   }
@@ -38,7 +38,7 @@ class Api {
   /// Make a request to the "forecast" endpoint
   Future<ForecastData> getForecast() async {
     http.Response response = await http.get(
-        Uri.encodeFull(forecastEndpoint), headers: { "Accept": "application/json" }
+        Uri.encodeFull(_forecastEndpoint), headers: { "Accept": "application/json" }
     );
     return ForecastData.deserialize(response.body);
   }
