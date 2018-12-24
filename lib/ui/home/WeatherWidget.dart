@@ -28,7 +28,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               this._weather = content;
             }))
         .catchError((e) => this.setState(() {
-              this._weather = new Weather("", new WeatherCondition(0, error), "");
+              this._weather =
+                  new Weather("", new WeatherCondition(0, error), "");
             }));
   }
 
@@ -36,26 +37,46 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   Widget build(BuildContext context) {
     return new Center(
       child: new Material(
-        color: Colors.cyan,
-        textStyle: TextStyle(color: Colors.white),
-        child: new Row(
-          children: <Widget>[
-            new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Text(this._weather.location,
-                    style: new TextStyle(fontSize: 15.0, color: Colors.white70)),
-                const SizedBox(height: 20.0,),
-                new Text("Today, ${DateFormat('MMMM d').format(DateTime.now())}",
-                    style: new TextStyle(fontSize: 15.0)),
-                new Text(this._weather.temperature,
-                    style: new TextStyle(fontSize: 35.0)),
-                new Text(this._weather.condition.description),
-              ],
-            )
-          ],
-        ),
-      ),
+          color: Colors.cyan,
+          textStyle: TextStyle(color: Colors.white),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text(this._weather.location,
+                  style: new TextStyle(fontSize: 13.0, color: Colors.white70)),
+              const SizedBox(
+                height: 20.0,
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  new Column(
+                    children: <Widget>[
+                      new Text(
+                          "Today, ${DateFormat('MMMM d').format(DateTime.now())}",
+                          style: new TextStyle(fontSize: 15.0)),
+                      new Text(this._weather.temperature,
+                          style: new TextStyle(fontSize: 35.0)),
+                    ],
+                  ),
+                  new Column(
+                    children: <Widget>[
+                      new Container(
+                        child: new Image.asset(
+                          _weather.condition.getAssetString(),
+                          height: 80.0,
+                          width: 80.0,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                      new Text(this._weather.condition.description,
+                          style: new TextStyle(fontSize: 12.0)),
+                    ],
+                  )
+                ],
+              )
+            ],
+          )),
     );
   }
 }

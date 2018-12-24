@@ -10,10 +10,11 @@ class WeatherPage extends StatelessWidget{
       appBar: new AppBar(
         title: new Text("Weather Forecast"),
       ),
-      body: new Container(
+      body: new Material(
+          color: Colors.cyan,
           child: new Column(
             children: <Widget>[
-              new Expanded(child: new WeatherWidget()),
+              new Container(child: new WeatherWidget(), height: 200,),
               new Expanded(child: new ForecastList()),
             ],
           )
