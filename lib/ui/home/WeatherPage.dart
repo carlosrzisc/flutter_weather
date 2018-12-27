@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/ui/home/WeatherWidget.dart';
 import 'ForecastList.dart';
 
+import 'package:flutter_weather/ui/settings/SettingsPage.dart';
+
 class WeatherPage extends StatelessWidget{
 
   @override
@@ -9,6 +11,13 @@ class WeatherPage extends StatelessWidget{
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Weather Forecast"),
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.settings),
+            color: Colors.white,
+            onPressed: () { _launchSettingsPage(context); }
+          )
+        ]
       ),
       body: new Material(
           color: Colors.cyan,
@@ -20,5 +29,10 @@ class WeatherPage extends StatelessWidget{
           )
       ),
     );
+  }
+
+  void _launchSettingsPage(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SettingsPage()));
   }
 }
