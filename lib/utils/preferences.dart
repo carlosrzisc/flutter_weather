@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_weather/model/weather.dart';
 import 'package:flutter_weather/model/forecast.dart';
 
+/// Utility class to manage the Shared preferences.
 class Preferences {
   static final String _kLocation = "location_key";
   static final String _kLocationQuery = "location_query_key";

@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'weather_condition.dart';
 
+/// Holds a list of the forecast weather for the retrieved days
 class ForecastData {
   List<ForecastWeather> forecastList;
   Map<String, List<ForecastWeather>> dailyForecast;
 
   ForecastData(this.forecastList, this.dailyForecast);
 
+  /// Deserialize the json response from the server and builds the forecast objects
   static ForecastData deserialize(String json) {
     JsonDecoder decoder = new JsonDecoder();
     var map = decoder.convert(json);
@@ -34,6 +36,7 @@ class ForecastData {
   }
 }
 
+/// Object to represent a single forecast weather
 class ForecastWeather {
   String temperature;
   DateTime dateTime;
@@ -52,6 +55,7 @@ class ForecastWeather {
                   this.humidity,
                   this.wind);
 
+  /// Deserialize the json response from the server and builds the forecast weather.
   static ForecastWeather _deserialize(Map<String, dynamic> map) {
     String description  = map["weather"][0]["description"];
     int id = map["weather"][0]["id"];

@@ -6,6 +6,7 @@ class WeatherCondition {
 
   // Based on weather code data found at:
   // https://openweathermap.org/weather-conditions
+  /// Returns the path to the asset mapped to a weather condition.
   String getAssetString() {
     if (id >= 200 && id <= 232)
       return "assets/img/storm.png";

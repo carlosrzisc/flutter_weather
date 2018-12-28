@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/utils/preferences.dart';
 
+/// Widget that displays the settings page to let the user change the location
+/// desired to get the weather.
 class SettingsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new _SettingsPageState();

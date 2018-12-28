@@ -4,6 +4,8 @@ import 'ForecastList.dart';
 
 import 'package:flutter_weather/ui/settings/SettingsPage.dart';
 
+/// Stateless Widget that displays the current weather at the top and the
+/// 5-days forecast list at the bottom.
 class WeatherPage extends StatelessWidget {
 
   @override

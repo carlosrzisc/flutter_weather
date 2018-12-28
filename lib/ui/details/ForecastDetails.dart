@@ -3,6 +3,7 @@ import 'package:flutter_weather/model/forecast.dart';
 
 import 'package:intl/intl.dart';
 
+/// Widget that displays the weather details information.
 class DetailsPage extends StatelessWidget {
   final ForecastWeather weather;
 

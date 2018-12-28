@@ -5,6 +5,7 @@ import 'package:flutter_weather/ui/details/ForecastDetails.dart';
 import 'package:flutter_weather/utils/preferences.dart';
 import 'package:intl/intl.dart';
 
+/// Widget that displays the forecast list.
 class ForecastList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

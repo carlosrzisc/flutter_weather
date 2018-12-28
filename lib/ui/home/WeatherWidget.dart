@@ -5,6 +5,7 @@ import 'package:flutter_weather/model/weather_condition.dart';
 import 'package:flutter_weather/utils/preferences.dart';
 import 'package:intl/intl.dart';
 
+/// Widget that displays the current weather.
 class WeatherWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
