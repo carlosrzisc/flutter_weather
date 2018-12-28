@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/model/weather.dart';
 import 'package:flutter_weather/api/service.dart';
 import 'package:flutter_weather/model/weather_condition.dart';
-
+import 'package:flutter_weather/utils/preferences.dart';
 import 'package:intl/intl.dart';
 
 class WeatherWidget extends StatefulWidget {
@@ -13,24 +13,20 @@ class WeatherWidget extends StatefulWidget {
 }
 
 class _WeatherWidgetState extends State<WeatherWidget> {
-  static final String loading = "Loading...";
-  static final String error =
+  static final String _error =
       "Error: could not fetch the weather data from the server";
-  var _weather = new Weather("", new WeatherCondition(0, loading), "");
+  var _weather = new Weather(
+      "", new WeatherCondition(0, "Loading..."), "", DateTime.now());
+  final snackBar = SnackBar(content: Text(_error));
 
   @override
   void initState() {
     super.initState();
-    Api.getInstance()
-        .getWeather()
-        .then((content) => this.setState(() {
-              print("weather: ${content.condition.description}");
-              this._weather = content;
-            }))
-        .catchError((e) => this.setState(() {
-              this._weather =
-                  new Weather("", new WeatherCondition(0, error), "");
-            }));
+    Preferences.getInstance().getWeatherFromCache()
+        .then((content) => this.setState(() { this._weather = content; }));
+    Api.getInstance().getWeather()
+        .then((content) => this.setState(() { this._weather = content; }))
+        .catchError((e) => this.setState(() { Scaffold.of(context).showSnackBar(snackBar); }));
   }
 
   @override
@@ -52,8 +48,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                 children: <Widget>[
                   new Column(
                     children: <Widget>[
-                      new Text(
-                          "Today, ${DateFormat('MMMM d').format(DateTime.now())}",
+                      Text("${DateFormat('MMMM d').format(this._weather.dateTime)}",
                           style: new TextStyle(fontSize: 15.0)),
                       new Text(this._weather.temperature,
                           style: new TextStyle(fontSize: 35.0)),

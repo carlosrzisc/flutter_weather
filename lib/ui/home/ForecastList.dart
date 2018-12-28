@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/api/service.dart';
 import 'package:flutter_weather/model/forecast.dart';
 import 'package:flutter_weather/ui/details/ForecastDetails.dart';
-
+import 'package:flutter_weather/utils/preferences.dart';
 import 'package:intl/intl.dart';
 
 class ForecastList extends StatefulWidget {
@@ -18,14 +18,11 @@ class _ForecastListState extends State<ForecastList> {
   @override
   void initState() {
     super.initState();
-    Api.getInstance()
-        .getForecast()
-        .then((content) => this.setState(() {
-              this._forecastData = content;
-            }))
-        .catchError((e) => this.setState(() {
-              print(e);
-            }));
+    Preferences.getInstance().getForecastFromCache()
+        .then((content) => this.setState(() { this._forecastData = content; }));
+    Api.getInstance().getForecast()
+        .then((content) => this.setState(() { this._forecastData = content; }))
+        .catchError((e) => this.setState(() { print(e); }));
   }
 
   @override

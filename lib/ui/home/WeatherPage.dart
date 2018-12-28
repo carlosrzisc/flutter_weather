@@ -4,7 +4,7 @@ import 'ForecastList.dart';
 
 import 'package:flutter_weather/ui/settings/SettingsPage.dart';
 
-class WeatherPage extends StatelessWidget{
+class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,15 @@ class WeatherPage extends StatelessWidget{
       appBar: new AppBar(
         title: new Text("Weather Forecast"),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context){ return WeatherPage(); }
+                  ));
+            }
+          ),
           IconButton(
             icon: new Icon(Icons.settings),
             color: Colors.white,

@@ -21,7 +21,7 @@ class WeatherCondition {
       return "assets/img/clear.png";
     else if (id == 801)
       return "assets/img/light_clouds.png";
-    else if (id >= 802 || id <= 804)
+    else if (id >= 802 && id <= 804)
       return "assets/img/cloudy.png";
     return "assets/img/unknown.png";
   }

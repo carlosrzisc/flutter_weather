@@ -27,6 +27,7 @@ class Api {
     http.Response response = await http.get(
         Uri.encodeFull(weatherEndpoint), headers: { "Accept" : "application/json" }
     );
+    Preferences.getInstance().cacheWeatherData(response.body);
     return Weather.deserialize(response.body);
   }
 
@@ -37,6 +38,7 @@ class Api {
     http.Response response = await http.get(
         Uri.encodeFull(forecastEndpoint), headers: { "Accept": "application/json" }
     );
+    Preferences.getInstance().cacheForecastData(response.body);
     return ForecastData.deserialize(response.body);
   }
 }
